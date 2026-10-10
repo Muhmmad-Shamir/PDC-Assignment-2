@@ -1,3 +1,4 @@
+package Q1;
 public class FIXOrderEvent extends TradeEvent {
     private String clOrdId;
 
@@ -6,7 +7,7 @@ public class FIXOrderEvent extends TradeEvent {
         super(senderId, timestamp, basePrice);
         this.clOrdId = clOrdId;
     }
-}
+
 
 @Override
 public void dispatch() {
@@ -21,4 +22,6 @@ public void dispatch() {
     System.out.println("Transaction fee: " + fee);
     System.out.println("Total purchase amount: " + totalPrice);
     System.out.println("Simulated purchase processed.");
+}
+
 }
