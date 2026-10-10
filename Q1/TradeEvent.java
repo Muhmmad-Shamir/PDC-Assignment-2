@@ -1,3 +1,4 @@
+package Q1;
 public class TradeEvent {
     protected String senderId;
     protected long timestamp;

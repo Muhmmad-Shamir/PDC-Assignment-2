@@ -1,3 +1,4 @@
+package Q1;
 public class ReutersQuoteEvent extends TradeEvent {
     private double bidPrice;
     private double askPrice;
@@ -9,7 +10,7 @@ public class ReutersQuoteEvent extends TradeEvent {
         this.bidPrice = bidPrice;
         this.askPrice = askPrice;
     }
-}
+
 
 @Override
 public void dispatch() {
@@ -22,4 +23,6 @@ public void dispatch() {
     System.out.println("Bid price: " + bidPrice);
     System.out.println("Ask price: " + askPrice);
     System.out.println("Bid-ask spread: " + spread);
+}
+
 }
