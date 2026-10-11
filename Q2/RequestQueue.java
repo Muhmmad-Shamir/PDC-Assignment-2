@@ -20,4 +20,26 @@ public class RequestQueue {
     public boolean isEmpty() {
         return size == 0;
     }
+
+        public void enqueue(char c) {
+        if (size == queue.length) {
+            throw new IllegalStateException("Queue is full");
+        }
+
+        queue[rear] = c;
+        rear = (rear + 1) % queue.length;
+        size++;
+    }
+
+    public char dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+
+        char value = queue[front];
+        front = (front + 1) % queue.length;
+        size--;
+        return value;
+    }
 }
+
