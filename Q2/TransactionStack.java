@@ -11,5 +11,22 @@ public class TransactionStack {
 
         stack = new char[capacity];
         top = -1;
+ 
     }
+   
+        public boolean isEmpty() {
+        return top == -1;
+    }
+
+    public void push(char c) {
+        if (top == stack.length - 1) {
+            throw new IllegalStateException("Stack is full");
+        }
+
+        top++;
+        stack[top] = c;
+    }
+
 }
+
+
