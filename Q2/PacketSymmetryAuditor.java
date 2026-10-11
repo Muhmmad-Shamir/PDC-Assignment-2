@@ -60,5 +60,24 @@ queueWorker.start();
 
 stackWorker.join();
 queueWorker.join();
+
+
+        boolean symmetric = true;
+
+        for (int i = 0; i < length; i++) {
+            System.out.println(
+                "Compare " + reversed[i] + " with " + original[i]
+            );
+
+            if (reversed[i] != original[i]) {
+                symmetric = false;
+            }
+        }
+
+        System.out.println("Symmetric: " + symmetric);
+        System.out.println(
+            "Comparison is case-sensitive and includes spaces."
+        );
+
     }
 }
