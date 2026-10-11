@@ -27,6 +27,25 @@ public class TransactionStack {
         stack[top] = c;
     }
 
+
+        public char pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+
+        char value = stack[top];
+        top--;
+        return value;
+    }
+
+    public char peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+
+        return stack[top];
+    }
 }
+
 
 
