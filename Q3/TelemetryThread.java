@@ -32,6 +32,15 @@ public class TelemetryThread extends Thread {
             System.out.printf(
                 "Used physical memory: %.1f MB%n", usedMemory
             );
+
+             try {
+                Thread.sleep(800);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+
+
         }
     }
 }
