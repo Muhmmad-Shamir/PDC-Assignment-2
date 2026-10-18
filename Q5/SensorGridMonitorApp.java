@@ -48,6 +48,38 @@ public class SensorGridMonitorApp {
             }, "Sensor-Worker-" + (i + 1));
         }
 
-        // Add thread execution here.
+                for (int i = 0; i < workers.length; i++) {
+            workers[i].start();
+        }
+
+        for (int i = 0; i < workers.length; i++) {
+            workers[i].join();
+        }
+
+        double globalMin = localMin[0];
+        double globalMax = localMax[0];
+
+        for (int i = 1; i < workers.length; i++) {
+            if (localMin[i] < globalMin) {
+                globalMin = localMin[i];
+            }
+
+            if (localMax[i] > globalMax) {
+                globalMax = localMax[i];
+            }
+        }
+
+        // Add timing and verification here.
+
+        for (int i = 0; i < workers.length; i++) {
+            System.out.println(
+                workers[i].getName()
+                + " | local minimum: " + localMin[i]
+                + " | local maximum: " + localMax[i]
+            );
+        }
+
+        System.out.println("Global minimum: " + globalMin);
+        System.out.println("Global maximum: " + globalMax);
     }
 }
