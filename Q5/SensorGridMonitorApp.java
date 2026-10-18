@@ -18,6 +18,8 @@ public class SensorGridMonitorApp {
         data[49999] = 150;
 
         System.out.println("Sensor values: " + data.length);
+                 
+                long startTime = System.nanoTime();
 
                 Thread[] workers = new Thread[4];
 
@@ -69,7 +71,22 @@ public class SensorGridMonitorApp {
             }
         }
 
-        // Add timing and verification here.
+        long elapsed = System.nanoTime() - startTime;
+
+        double checkMin = data[0];
+        double checkMax = data[0];
+
+        for (int i = 1; i < data.length; i++) {
+            if (data[i] < checkMin) {
+                checkMin = data[i];
+            }
+
+            if (data[i] > checkMax) {
+                checkMax = data[i];
+            }
+        }
+
+        boolean correct = globalMin == checkMin && globalMax == checkMax;
 
         for (int i = 0; i < workers.length; i++) {
             System.out.println(
@@ -81,5 +98,11 @@ public class SensorGridMonitorApp {
 
         System.out.println("Global minimum: " + globalMin);
         System.out.println("Global maximum: " + globalMax);
+
+        System.out.println("Matches serial check: " + correct);
+
+        System.out.printf( "Parallel time including thread startup: %.3f ms%n",
+            elapsed / 1000000.0
+        );
     }
 }
