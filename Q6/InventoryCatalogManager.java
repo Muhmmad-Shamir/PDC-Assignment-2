@@ -43,4 +43,15 @@ public class InventoryCatalogManager {
     return runBenchmark("Synchronized Map");
     }
 
+
+    public double benchmarkConcurrentMap()
+        throws InterruptedException {
+
+    catalog = new ConcurrentHashMap<String, Integer>();
+
+    initializeCatalog();
+
+    return runBenchmark("ConcurrentHashMap");
+}
+
 }
