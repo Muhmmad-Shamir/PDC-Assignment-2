@@ -31,4 +31,16 @@ public class InventoryCatalogManager {
             catalog.put(productIds[i], INITIAL_STOCK);
         }
     }
+
+    public double benchmarkSynchronizedMap()
+        throws InterruptedException {
+
+    catalog = Collections.synchronizedMap(
+            new HashMap<String, Integer>());
+
+    initializeCatalog();
+
+    return runBenchmark("Synchronized Map");
+    }
+
 }
