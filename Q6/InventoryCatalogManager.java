@@ -108,13 +108,48 @@ private double runBenchmark(String label)
 
     long elapsed = System.nanoTime() - startTime;
 
-    
+    long actualStock = 0;
 
-    double milliseconds = elapsed / 1_000_000.0;
+for (int stock : catalog.values()) {
+    actualStock += stock;
+}
+
+int totalOperations = WORKERS * OPERATIONS_PER_WORKER;
+int totalUpdates = WORKERS * (OPERATIONS_PER_WORKER / 2);
+int totalReads = totalOperations - totalUpdates;
+
+long expectedStock =
+        (long) PRODUCTS * INITIAL_STOCK + totalUpdates;
+
+long combinedReadTotal = 0;
+
+for (long value : readTotals) {
+    combinedReadTotal += value;
+}
+
+boolean correct = actualStock == expectedStock;
+
+double seconds = elapsed / 1_000_000_000.0;
+double throughput = totalOperations / seconds;
+
+
+double milliseconds = elapsed / 1_000_000.0;
 
     System.out.println("\n--- " + label + " ---");
     System.out.printf("Time: %.3f ms%n", milliseconds);
-
+    System.out.println("Workers: " + WORKERS);
+    System.out.println("Total operations: " + totalOperations);
+    System.out.println("Read operations: " + totalReads);
+    System.out.println("Update operations: " + totalUpdates);
+    
+    System.out.println("Expected total stock: " + expectedStock);
+    System.out.println("Actual total stock: " + actualStock);
+    System.out.println("Stock check passed: " + correct);
+    
+    System.out.println("Combined read total: " + combinedReadTotal);
+    
+    System.out.printf(
+        "Throughput: %.2f operations/second%n", throughput);
     return milliseconds;
 }
 
