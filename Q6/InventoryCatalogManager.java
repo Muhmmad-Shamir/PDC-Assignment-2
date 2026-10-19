@@ -153,4 +153,47 @@ double milliseconds = elapsed / 1_000_000.0;
     return milliseconds;
 }
 
+public static void main(String[] args)
+        throws InterruptedException {
+
+    InventoryCatalogManager manager =
+            new InventoryCatalogManager();
+
+    System.out.println("Inventory Catalog Benchmark");
+    System.out.println("Each worker performs 5000 operations.");
+
+    double synchronizedTime =
+            manager.benchmarkSynchronizedMap();
+
+    double concurrentTime =
+            manager.benchmarkConcurrentMap();
+
+    double speedup = synchronizedTime / concurrentTime;
+
+    System.out.println("\n--- Comparison ---");
+
+    System.out.printf(
+            "Synchronized Map time: %.3f ms%n",
+            synchronizedTime);
+
+    System.out.printf(
+            "ConcurrentHashMap time: %.3f ms%n",
+            concurrentTime);
+
+    System.out.printf(
+            "Speedup ratio: %.2f%n", speedup);
+
+    if (concurrentTime < synchronizedTime) {
+        System.out.println(
+                "ConcurrentHashMap was faster in this run.");
+    } else if (concurrentTime > synchronizedTime) {
+        System.out.println(
+                "Synchronized Map was faster in this run.");
+    } else {
+        System.out.println(
+                "Both maps had the same measured time.");
+    }
+}
+
+
 }
