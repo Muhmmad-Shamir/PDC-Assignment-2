@@ -115,7 +115,49 @@ public double sumColumnMajor() {
                 columnTime / 1_000_000.0);
     }
 
-    // Add the final comparison here in Step 5.
+    double averageRowMs =
+        totalRowTime / (ITERATIONS * 1_000_000.0);
+
+double averageColumnMs =
+        totalColumnTime / (ITERATIONS * 1_000_000.0);
+
+double speedup = averageColumnMs / averageRowMs;
+
+double expectedSum =
+        (double) SIZE * SIZE * (SIZE - 1);
+
+boolean correct = allSumsMatch
+        && rowSum == expectedSum
+        && columnSum == expectedSum;
+
+System.out.println("\n--- Final Results ---");
+
+System.out.printf("Expected sum: %.0f%n", expectedSum);
+System.out.printf("Row-major sum: %.0f%n", rowSum);
+System.out.printf("Column-major sum: %.0f%n", columnSum);
+
+System.out.println("All iteration sums match: " + allSumsMatch);
+System.out.println("Correctness check passed: " + correct);
+
+System.out.printf(
+        "Average row-major time: %.3f ms%n", averageRowMs);
+
+System.out.printf(
+        "Average column-major time: %.3f ms%n", averageColumnMs);
+
+System.out.printf(
+        "Row-major speedup (column / row): %.2f%n", speedup);
+
+if (averageRowMs < averageColumnMs) {
+    System.out.println(
+            "Row-major traversal was faster in this run.");
+} else if (averageRowMs > averageColumnMs) {
+    System.out.println(
+            "Column-major traversal was faster in this run.");
+} else {
+    System.out.println(
+            "Both traversals had the same average time.");
+}
 }
 
 }
