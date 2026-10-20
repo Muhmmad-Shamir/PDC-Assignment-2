@@ -32,4 +32,18 @@ public class CacheLocalityBenchmark {
 
     return sum;
 }
+
+public double sumColumnMajor() {
+
+    double sum = 0;
+
+    for (int column = 0; column < SIZE; column++) {
+        for (int row = 0; row < SIZE; row++) {
+            sum += matrix[row][column];
+        }
+    }
+
+    return sum;
+}
+  
 }
