@@ -19,4 +19,17 @@ public class CacheLocalityBenchmark {
             }
         }
     }
+
+    public double sumRowMajor() {
+
+    double sum = 0;
+
+    for (int row = 0; row < SIZE; row++) {
+        for (int column = 0; column < SIZE; column++) {
+            sum += matrix[row][column];
+        }
+    }
+
+    return sum;
+}
 }
